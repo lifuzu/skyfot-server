@@ -1,2 +1,5 @@
 config.js
 node_modules
+
+err.log
+out.log
