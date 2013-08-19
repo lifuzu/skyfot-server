@@ -6,6 +6,9 @@ var express = require('express')
   , User = mongoose.model('User')
   , welcome = require('./controllers/welcome')
   , users = require('./controllers/users')
+  , ImageModel = require('./models/image')
+  , Image = mongoose.model('Image')
+  , images = require('./controllers/images')
   , http = require('http')
   , path = require('path')
   , engine = require('ejs-locals')
@@ -77,7 +80,7 @@ if ('development' == app.get('env')) {
 if ('development' == app.get('env')) {
   mongoose.connect('mongodb://localhost/bubblepop');
 } else {
-  // insert db connection for production
+  mongoose.connect('mongodb://localhost/skyfot');
 }
 
 // Authentication
@@ -133,6 +136,8 @@ app.get('/account', ensureAuthenticated, users.account);
 app.post('/account', ensureAuthenticated, users.userValidations, users.update);
 app.get('/dashboard', ensureAuthenticated, users.dashboard);
 app.get('/logout', users.logout);
+app.get('/images', images.list);
+app.post('/upload', images.create);
 app.get('/users', ensureAuthenticated, users.list); // for illustrative purposes only
 app.all('*', welcome.not_found);
 
