@@ -20,7 +20,7 @@ exports.list = function(req, res, next){
 exports.create = function(req, res, next){
   console.log("Received file: " + JSON.stringify(req.files));
 
-  var imageDir = path.join(__dirname, "../upload/images/")
+  var imageDir = path.join(__dirname, "../public/upload/images/")
   	, thumbnailsDir = path.join(imageDir, "thumbnails/")
   	, imageName = req.files.file.name
   	, imageFullname = path.join(imageDir, imageName);
